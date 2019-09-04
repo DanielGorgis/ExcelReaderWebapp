@@ -4,6 +4,13 @@ import pandas as pd
 from werkzeug import secure_filename
 
 
+
+
+@app.route('/Menu', methods=['GET','POST'])
+def Menu_func():
+    return render_template('Menu.html')
+
+
 @app.route('/Guide', methods=['GET','POST'])
 def index_test():
     return render_template('Guide.html')
