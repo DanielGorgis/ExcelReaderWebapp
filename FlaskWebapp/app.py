@@ -4,11 +4,6 @@ import pandas as pd
 from werkzeug import secure_filename
 
 
- ##test
- #sdadasasd
-
- #New test
-
 @app.route('/Guide', methods=['GET','POST'])
 def index_test():
     return render_template('Guide.html')
