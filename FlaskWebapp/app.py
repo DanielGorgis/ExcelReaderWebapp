@@ -2,6 +2,22 @@ from flask import Flask, render_template, request, send_file
 app = Flask(__name__)
 import pandas as pd
 from werkzeug import secure_filename
+import pyrebase
+
+config = {
+   
+    "apiKey": "AIzaSyCrsVN34ekVYJyA8-rmJsB5CIzxalliwn4",
+    "authDomain": "excelreaderwebapp.firebaseapp.com",
+    "databaseURL": "https://excelreaderwebapp.firebaseio.com",
+    "projectId": "excelreaderwebapp",
+    "storageBucket": "excelreaderwebapp.appspot.com",
+    "messagingSenderId": "140528926098",
+    "appId": "1:140528926098:web:af714fe13ef9c2ff0b154b"
+
+}
+firebase = pyrebase.initialize_app(config)
+
+storage = firebase.storage()
 
 
 #test
@@ -29,6 +45,10 @@ def home():
         f1 = request.files['file1']
         f2 = request.files['file2']
         f3 = request.files['file3']
+
+        storage.child("files/file1").put(f1.filename)
+        storage.child("files/file2").put(f2.filename)
+        storage.child("files/file3").put(f3.filename)
 
         #request form column names
         f1_column = request.form['ColumnnameFile1']
@@ -78,10 +98,11 @@ def home():
 
 
         #Convert variable to excel for download
-        Last_Result_DF.to_excel('LastResult.xlsx')
+        Last_Result_DF.to_excel('/FlaskWebapp/LastResult.xlsx')
 
 
-        return send_file('LastResult.xlsx') 
+        #return send_file('LastResult.xlsx') 
+        return render_template('Program.html')
   
 
     return render_template('Program.html')
