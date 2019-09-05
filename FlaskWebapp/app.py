@@ -98,7 +98,7 @@ def home():
 
 
         #Convert variable to excel for download
-        Last_Result_DF.to_excel('/FlaskWebapp/LastResult.xlsx')
+        Last_Result_DF.to_excel('/FlaskWebapp/.xlsx')
 
 
         #return send_file('LastResult.xlsx') 
